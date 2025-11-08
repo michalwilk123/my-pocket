@@ -1,0 +1,98 @@
+@import "tailwindcss";
+@plugin "daisyui";
+@import "tw-animate-css";
+
+@plugin "daisyui/theme" {
+  name: "mypocket";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+
+  --color-base-100: oklch(99.2% 0.008 85);
+  --color-base-200: oklch(97.8% 0.01 82);
+  --color-base-300: oklch(96.5% 0.012 80);
+  --color-base-content: oklch(22% 0.03 25);
+  --color-primary: oklch(68% 0.24 23);
+  --color-primary-content: oklch(99% 0.012 30);
+  --color-secondary: oklch(98% 0.01 100.5);
+  --color-secondary-content: oklch(35% 0.05 25);
+  --color-accent: oklch(74% 0.19 30);
+  --color-accent-content: oklch(99% 0.01 25);
+  --color-neutral: oklch(92% 0.01 98);
+  --color-neutral-content: oklch(55% 0.03 25);
+  --color-info: oklch(66% 0.1 170);
+  --color-info-content: oklch(99% 0.01 170);
+  --color-success: oklch(72% 0.16 85);
+  --color-success-content: oklch(18% 0.04 85);
+  --color-warning: oklch(86% 0.16 100);
+  --color-warning-content: oklch(22% 0.03 100);
+  --color-error: oklch(62% 0.18 27);
+  --color-error-content: oklch(99% 0.01 27);
+
+  --radius-selector: 1rem;
+  --radius-field: 0.625rem;
+  --radius-box: 1rem;
+
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  --border: 1px;
+
+  --depth: 1;
+  --noise: 0;
+}
+
+@plugin "daisyui/theme" {
+  name: "mypocket-dark";
+  default: false;
+  prefersdark: true;
+  color-scheme: dark;
+
+  --color-base-100: oklch(18% 0.04 25);
+  --color-base-200: oklch(24% 0.04 25);
+  --color-base-300: oklch(32% 0.03 45);
+  --color-base-content: oklch(97% 0.01 25);
+  --color-primary: oklch(72% 0.16 27);
+  --color-primary-content: oklch(18% 0.04 25);
+  --color-secondary: oklch(32% 0.03 45);
+  --color-secondary-content: oklch(97% 0.01 25);
+  --color-accent: oklch(58% 0.21 27);
+  --color-accent-content: oklch(97% 0.01 27);
+  --color-neutral: oklch(27% 0.03 40);
+  --color-neutral-content: oklch(70% 0.04 25);
+  --color-info: oklch(68% 0.14 170);
+  --color-info-content: oklch(97% 0.01 170);
+  --color-success: oklch(72% 0.16 85);
+  --color-success-content: oklch(18% 0.04 85);
+  --color-warning: oklch(46% 0.19 110);
+  --color-warning-content: oklch(97% 0.01 110);
+  --color-error: oklch(58% 0.18 27);
+  --color-error-content: oklch(97% 0.01 27);
+
+  --radius-selector: 1rem;
+  --radius-field: 0.625rem;
+  --radius-box: 1rem;
+
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  --border: 1px;
+
+  --depth: 1;
+  --noise: 0;
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@layer base {
+  button,
+  [role="button"] {
+    @apply cursor-pointer;
+  }
+  a[href] {
+    @apply cursor-pointer;
+  }
+}

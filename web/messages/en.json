@@ -1,0 +1,91 @@
+{
+  "header": {
+    "title": "my pocket",
+    "tagline": "save · organize · remember",
+    "addUrl": "Add URL"
+  },
+  "search": {
+    "placeholder": "Search links by title or URL",
+    "sort": {
+      "label": "Sort by",
+      "options": {
+        "newest": "Newest first",
+        "oldest": "Oldest first",
+        "titleAsc": "Title A - Z",
+        "titleDesc": "Title Z - A"
+      }
+    }
+  },
+  "linkCard": {
+    "copyUrl": "Copy URL to clipboard",
+    "edit": "Edit",
+    "delete": "Delete",
+    "noTags": "No tags",
+    "editLabel": "Edit this link",
+    "deleteLabel": "Delete this link"
+  },
+  "addModal": {
+    "heading": "Save a URL",
+    "description": "Fill in the details to save a new link to your collection.",
+    "submitLabel": "Save link",
+    "urlLabel": "URL",
+    "urlPlaceholder": "https://example.com",
+    "titleLabel": "Title (optional)",
+    "titlePlaceholder": "Add a custom title...",
+    "saving": "Saving..."
+  },
+  "editModal": {
+    "heading": "Update details",
+    "description": "Modify the link information and press Enter or click Save to update.",
+    "submitLabel": "Save changes"
+  },
+  "deleteModal": {
+    "heading": "Delete link",
+    "description": "Are you sure you want to delete",
+    "confirmButton": "Delete",
+    "cancelButton": "Cancel"
+  },
+  "tags": {
+    "newTag": "New tag"
+  },
+  "toast": {
+    "linkCopied": "Link copied to clipboard"
+  },
+  "emptyState": {
+    "heading": "No links yet",
+    "description": "Start building your collection by adding your first link. Click the \"Add URL\" button to get started.",
+    "addFirstLink": "Add your first link"
+  },
+  "login": {
+    "heading": "Welcome to My Pocket",
+    "description": "Sign in to save and organize your favorite links",
+    "continueWithGoogle": "Continue with Google",
+    "termsNotice": "By signing in, you agree to our Terms of Service and Privacy Policy"
+  },
+  "profile": {
+    "about": {
+      "heading": "About My Pocket",
+      "description": "My Pocket helps you save, organize, and revisit your favorite links with ease."
+    },
+    "heading": "User Profile",
+    "description": "Manage your account settings and preferences",
+    "dataManagement": "Data Management",
+    "accountActions": "Account Actions",
+    "import": "Import",
+    "importFormat": "Mozilla Pocket & Instapaper CSV",
+    "export": "Export",
+    "exportFormat": "Mozilla Pocket CSV format",
+    "logout": "Logout",
+    "deleteAccount": "Delete Account",
+    "deleteWarning": "⚠️ Deleting your account is permanent and cannot be undone."
+  },
+  "footer": {
+    "copyright": "my pocket. All rights reserved.",
+    "tagline": "Your calm space for saving, organizing, and revisiting links."
+  },
+  "pagination": {
+    "showing": "Showing",
+    "of": "of",
+    "results": "results"
+  }
+}

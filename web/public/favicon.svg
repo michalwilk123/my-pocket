@@ -1,0 +1,20 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="faviconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:rgb(255, 127, 89);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgb(206, 102, 92);stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Rounded rectangle background -->
+  <rect x="1" y="1" width="30" height="30" rx="4" ry="4" fill="url(#faviconGradient)"/>
+  
+  <!-- "mp" text - optimized for small sizes -->
+  <text x="16" y="22" 
+        font-family="system-ui, -apple-system, sans-serif" 
+        font-size="16" 
+        font-weight="bold" 
+        fill="white" 
+        text-anchor="middle">mp</text>
+</svg>
+

@@ -1,0 +1,91 @@
+{
+  "header": {
+    "title": "my pocket",
+    "tagline": "zapisz · organizuj · pamiętaj",
+    "addUrl": "Dodaj URL"
+  },
+  "search": {
+    "placeholder": "Szukaj linków po tytule lub URL",
+    "sort": {
+      "label": "Sortuj według",
+      "options": {
+        "newest": "Najnowsze",
+        "oldest": "Najstarsze",
+        "titleAsc": "Tytuł A - Z",
+        "titleDesc": "Tytuł Z - A"
+      }
+    }
+  },
+  "linkCard": {
+    "copyUrl": "Kopiuj URL do schowka",
+    "edit": "Edytuj",
+    "delete": "Usuń",
+    "noTags": "Brak tagów",
+    "editLabel": "Edytuj ten link",
+    "deleteLabel": "Usuń ten link"
+  },
+  "addModal": {
+    "heading": "Zapisz URL",
+    "description": "Wypełnij szczegóły, aby zapisać nowy link do kolekcji.",
+    "submitLabel": "Zapisz link",
+    "urlLabel": "URL",
+    "urlPlaceholder": "https://przyklad.pl",
+    "titleLabel": "Tytuł (opcjonalnie)",
+    "titlePlaceholder": "Dodaj własny tytuł...",
+    "saving": "Zapisywanie..."
+  },
+  "editModal": {
+    "heading": "Zaktualizuj szczegóły",
+    "description": "Zmodyfikuj informacje o linku i naciśnij Enter lub kliknij Zapisz.",
+    "submitLabel": "Zapisz zmiany"
+  },
+  "deleteModal": {
+    "heading": "Usuń link",
+    "description": "Czy na pewno chcesz usunąć",
+    "confirmButton": "Usuń",
+    "cancelButton": "Anuluj"
+  },
+  "tags": {
+    "newTag": "Nowy tag"
+  },
+  "toast": {
+    "linkCopied": "Link skopiowany do schowka"
+  },
+  "emptyState": {
+    "heading": "Brak linków",
+    "description": "Zacznij budować kolekcję dodając pierwszy link. Kliknij przycisk \"Dodaj URL\".",
+    "addFirstLink": "Dodaj pierwszy link"
+  },
+  "login": {
+    "heading": "Witaj w My Pocket",
+    "description": "Zaloguj się, aby zapisywać i organizować ulubione linki",
+    "continueWithGoogle": "Kontynuuj z Google",
+    "termsNotice": "Logując się, zgadzasz się na nasze Warunki Usługi i Politykę Prywatności"
+  },
+  "profile": {
+    "about": {
+      "heading": "O My Pocket",
+      "description": "My Pocket pomaga zapisywać, organizować i przeglądać ulubione linki z łatwością."
+    },
+    "heading": "Profil użytkownika",
+    "description": "Zarządzaj ustawieniami konta i preferencjami",
+    "dataManagement": "Zarządzanie danymi",
+    "accountActions": "Akcje konta",
+    "import": "Importuj",
+    "importFormat": "Mozilla Pocket i Instapaper CSV",
+    "export": "Eksportuj",
+    "exportFormat": "Format Mozilla Pocket CSV",
+    "logout": "Wyloguj",
+    "deleteAccount": "Usuń konto",
+    "deleteWarning": "⚠️ Usunięcie konta jest trwałe i nie można go cofnąć."
+  },
+  "footer": {
+    "copyright": "my pocket. Wszystkie prawa zastrzeżone.",
+    "tagline": "Twoja spokojna przestrzeń do zapisywania, organizowania i przeglądania linków."
+  },
+  "pagination": {
+    "showing": "Wyświetlanie",
+    "of": "z",
+    "results": "wyników"
+  }
+}
