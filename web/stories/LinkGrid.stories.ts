@@ -11,7 +11,6 @@ const meta = {
   },
   tags: ["autodocs"],
   args: {
-    onCardClick: fn(),
     onEdit: fn(),
     onDelete: fn(),
     onAddClick: fn(),

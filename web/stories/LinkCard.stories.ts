@@ -11,7 +11,6 @@ const meta = {
   },
   tags: ["autodocs"],
   args: {
-    onClick: fn(),
     onEdit: fn(),
     onDelete: fn(),
     createdAt: "2024-01-01T00:00:00.000Z",

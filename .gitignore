@@ -87,3 +87,4 @@ extension/.idea/
 
 # Project-specific
 extension/web-ext.config.ts
+.vercel
