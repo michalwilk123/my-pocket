@@ -9,7 +9,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     initialize();
-  }, [initialize]);
+  }, []);
 
   return <>{children}</>;
 }

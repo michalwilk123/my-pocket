@@ -29,37 +29,6 @@ function AuthLoadingFallback() {
   );
 }
 
-type InitialLoadingFallbackProps = {
-  onAddClick: () => void;
-  onProfileClick: () => void;
-};
-
-function InitialLoadingFallback({
-  onAddClick,
-  onProfileClick,
-}: InitialLoadingFallbackProps) {
-  return (
-    <div className="flex min-h-screen flex-col bg-base-100 text-base-content">
-      <HeaderContainer
-        onAddClick={onAddClick}
-        onProfileClick={onProfileClick}
-      />
-      <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-6 px-6 py-6">
-        <div className="flex flex-col gap-4">
-          <div className="skeleton h-12 w-full" />
-          <div className="skeleton h-8 w-48" />
-        </div>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {[1, 2, 3, 4, 5, 6].map((i) => (
-            <div key={i} className="skeleton h-64 w-full" />
-          ))}
-        </div>
-      </main>
-      <Footer />
-    </div>
-  );
-}
-
 function UnauthenticatedLanding() {
   const demoLinks = [
     {
@@ -160,7 +129,7 @@ export default function Home() {
         setIsInitialLoad(false);
       });
     }
-  }, [user, fetchLinks, fetchTags]);
+  }, [user]);
 
   function handleProfileClick() {
     showModal(Modals.UserProfile, {});
@@ -171,33 +140,23 @@ export default function Home() {
       {!user ? (
         <UnauthenticatedLanding />
       ) : (
-        <Loadable
-          isLoading={isInitialLoad}
-          fallback={
-            <InitialLoadingFallback
-              onAddClick={() => showModal(Modals.AddLink, {})}
-              onProfileClick={handleProfileClick}
-            />
-          }
-        >
-          <div className="flex min-h-screen flex-col bg-base-100 text-base-content">
-            <HeaderContainer
-              onAddClick={() => showModal(Modals.AddLink, {})}
-              onProfileClick={handleProfileClick}
-            />
+        <div className="flex min-h-screen flex-col bg-base-100 text-base-content">
+          <HeaderContainer
+            onAddClick={() => showModal(Modals.AddLink, {})}
+            onProfileClick={handleProfileClick}
+          />
 
-            <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-6 px-6 py-6">
-              <SearchBarContainer />
+          <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-6 px-6 py-6">
+            <SearchBarContainer />
 
-              <LinkGridContainer />
+            <LinkGridContainer isInitialLoad={isInitialLoad} />
 
-              <PaginationContainer />
-            </main>
+            <PaginationContainer />
+          </main>
 
-            <Footer />
-            <ToastContainer />
-          </div>
-        </Loadable>
+          <Footer />
+          <ToastContainer />
+        </div>
       )}
     </Loadable>
   );

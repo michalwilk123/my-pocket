@@ -6,21 +6,24 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 import { shallow } from "zustand/shallow";
 
-import { LinkGrid } from "@/components";
+import { LinkGrid, Loadable } from "@/components";
 import { Modals, useModals } from "@/contexts/modals";
 import { useLinksStore, useSearchStore } from "@/store";
 
-export function LinkGridContainer() {
+type LinkGridContainerProps = {
+  isInitialLoad: boolean;
+};
+
+export function LinkGridContainer({ isInitialLoad }: LinkGridContainerProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const query = searchParams.get("q") || "";
   const pageParam = searchParams.get("page");
   const pageFromUrl = pageParam ? parseInt(pageParam, 10) : 1;
 
-  const { links, isLoading } = useLinksStore(
+  const { links } = useLinksStore(
     (state) => ({
       links: state.links,
-      isLoading: state.isLoading,
     }),
     shallow
   );
@@ -65,24 +68,25 @@ export function LinkGridContainer() {
     [toggleTag, router, searchParams]
   );
 
-  if (isLoading) {
-    return (
-      <div className="grid gap-5 lg:grid-cols-2 xl:grid-cols-3">
-        {[1, 2, 3, 4, 5, 6].map((i) => (
-          <div key={i} className="skeleton h-80 w-full" />
-        ))}
-      </div>
-    );
-  }
-
   return (
-    <LinkGrid
-      links={paginatedLinks}
-      onEdit={handleEditClick}
-      onDelete={handleDeleteClick}
-      onAddClick={handleAddClick}
-      onTagClick={handleTagClick}
-      sortOrder={sortOrder}
-    />
+    <Loadable
+      isLoading={isInitialLoad}
+      fallback={
+        <div className="grid gap-5 lg:grid-cols-2 xl:grid-cols-3">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <div key={i} className="skeleton h-80 w-full" />
+          ))}
+        </div>
+      }
+    >
+      <LinkGrid
+        links={paginatedLinks}
+        onEdit={handleEditClick}
+        onDelete={handleDeleteClick}
+        onAddClick={handleAddClick}
+        onTagClick={handleTagClick}
+        sortOrder={sortOrder}
+      />
+    </Loadable>
   );
 }

@@ -46,7 +46,7 @@ export function EditLinkModalContainer(props: EditLinkModalContainerProps) {
     } else if (!props.isOpen) {
       setEditTarget(null);
     }
-  }, [props.isOpen, props.linkId, getLinkById]);
+  }, [props.isOpen, props.linkId]);
 
   const linkId = props.linkId ?? "";
 

@@ -41,7 +41,7 @@ export function SearchBarContainer() {
 
   useEffect(() => {
     searchLinks(query, selectedTags);
-  }, [query, selectedTags, searchLinks]);
+  }, [query, selectedTags]);
 
   function handleSearchChange(newQuery: string) {
     setInputValue(newQuery);
@@ -51,7 +51,7 @@ export function SearchBarContainer() {
     const rawSort = searchParams.get("sort");
     const nextSort = isSortOption(rawSort) ? rawSort : DEFAULT_SORT_OPTION;
     setSortOrder(nextSort);
-  }, [searchParams, setSortOrder]);
+  }, [searchParams]);
 
   const handleSortChange = useCallback(
     (order: SortOption) => {
