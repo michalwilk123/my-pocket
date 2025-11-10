@@ -227,6 +227,7 @@ export async function deleteLink(
   const db = createDB(supabaseClient);
   const userId = await db.auth.query.getCurrentUserId();
   await db.links.mutate.delete(id, userId);
+  await db.tags.mutate.removeOrphanedTags(userId);
 }
 
 export async function addTagToLink(
@@ -262,6 +263,7 @@ export async function removeTagFromLink(
   const userId = await db.auth.query.getCurrentUserId();
 
   await db.links.mutate.deleteLinkTag(linkId, tagId);
+  await db.tags.mutate.removeOrphanedTags(userId);
 
   const linkTagRows = await db.links.query.selectLinkTagsByLinkIds([linkId]);
   const tags = linkTagRows

@@ -26,10 +26,11 @@ export function EditLinkModalContainer(props: EditLinkModalContainerProps) {
       shallow
     );
 
-  const { addTag, updateTag } = useTagsStore(
+  const { addTag, updateTag, getTagByLabel } = useTagsStore(
     (state) => ({
       addTag: state.addTag,
       updateTag: state.updateTag,
+      getTagByLabel: state.getTagByLabel,
     }),
     shallow
   );
@@ -103,9 +104,17 @@ export function EditLinkModalContainer(props: EditLinkModalContainerProps) {
 
       for (const editedTag of editTarget.tags) {
         if (editedTag.id.startsWith("temp-")) {
-          const newTag = await addTag(editedTag.label);
-          if (newTag) {
-            await addTagToLink(editTarget.id, newTag.id);
+          const existingTag = getTagByLabel(editedTag.label);
+          if (existingTag) {
+            const alreadyHasTag = originalLink.tags.some((t) => t.id === existingTag.id);
+            if (!alreadyHasTag) {
+              await addTagToLink(editTarget.id, existingTag.id);
+            }
+          } else {
+            const newTag = await addTag(editedTag.label);
+            if (newTag) {
+              await addTagToLink(editTarget.id, newTag.id);
+            }
           }
         } else {
           const originalTag = originalLink.tags.find((t) => t.id === editedTag.id);

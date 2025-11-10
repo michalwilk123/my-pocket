@@ -249,6 +249,38 @@ class DBTags extends DBBase {
 
       handleVoidResult(response);
     },
+
+    removeOrphanedTags: async (userId: string) => {
+      const tagsResponse = await this.client
+        .from("mypocket_tag")
+        .select("id")
+        .eq("user_id", userId);
+
+      const userTagIds = handleManyResult(tagsResponse).map((row: any) => row.id);
+
+      if (userTagIds.length === 0) {
+        return;
+      }
+
+      const linkTagsResponse = await this.client
+        .from("mypocket_link_tag")
+        .select("tag_id")
+        .in("tag_id", userTagIds);
+
+      const linkedTagIds = new Set(
+        handleManyResult(linkTagsResponse).map((row: any) => row.tag_id)
+      );
+
+      const orphanedTagIds = userTagIds.filter(id => !linkedTagIds.has(id));
+
+      if (orphanedTagIds.length > 0) {
+        const deleteResponse = await this.client
+          .from("mypocket_tag")
+          .delete()
+          .in("id", orphanedTagIds);
+        handleVoidResult(deleteResponse);
+      }
+    },
   };
 }
 

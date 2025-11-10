@@ -12,6 +12,7 @@ type TagsState = {
   removeTag: (id: string) => Promise<void>;
   updateTag: (id: string, label: string) => Promise<void>;
   getTagById: (id: string) => Tag | undefined;
+  getTagByLabel: (label: string) => Tag | undefined;
 };
 
 export const useTagsStore = createWithEqualityFn<TagsState>()((set, get) => ({
@@ -87,5 +88,11 @@ export const useTagsStore = createWithEqualityFn<TagsState>()((set, get) => ({
   getTagById: (id: string) => {
     if (!id) return undefined;
     return get().tags.find((tag) => tag.id === id);
+  },
+
+  getTagByLabel: (label: string) => {
+    if (!label.trim()) return undefined;
+    const normalized = label.trim().toLowerCase();
+    return get().tags.find((tag) => tag.label.toLowerCase() === normalized);
   },
 }));

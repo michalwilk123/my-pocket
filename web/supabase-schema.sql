@@ -24,7 +24,8 @@ CREATE TABLE IF NOT EXISTS mypocket_link (
   note VARCHAR(512) DEFAULT '',
   image TEXT DEFAULT '',
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  UNIQUE(user_id, url)
 );
 
 -- Link tag junction table

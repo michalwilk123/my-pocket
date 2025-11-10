@@ -21,12 +21,13 @@ export function AddLinkModalContainer(props: AddLinkModalContainerProps) {
     shallow
   );
 
-  const { tags, addTag, updateTag, removeTag } = useTagsStore(
+  const { tags, addTag, updateTag, removeTag, getTagByLabel } = useTagsStore(
     (state) => ({
       tags: state.tags,
       addTag: state.addTag,
       updateTag: state.updateTag,
       removeTag: state.removeTag,
+      getTagByLabel: state.getTagByLabel,
     }),
     shallow
   );
@@ -61,9 +62,16 @@ export function AddLinkModalContainer(props: AddLinkModalContainerProps) {
 
   async function handleTagAdd(label: string) {
     if (!label.trim()) return;
-    const newTag = await addTag(label);
-    if (newTag) {
-      setSelectedTagIds((prev) => [...prev, newTag.id]);
+    const existingTag = getTagByLabel(label);
+    if (existingTag) {
+      setSelectedTagIds((prev) =>
+        prev.includes(existingTag.id) ? prev : [...prev, existingTag.id]
+      );
+    } else {
+      const newTag = await addTag(label);
+      if (newTag) {
+        setSelectedTagIds((prev) => [...prev, newTag.id]);
+      }
     }
   }
 
