@@ -73,7 +73,7 @@ export function SearchBar(props: SearchBarProps) {
 
       <div className="flex flex-col gap-2.5 rounded-lg border border-base-300/70 bg-base-200/40 p-2.5 shadow-sm sm:flex-row sm:items-center sm:justify-between">
         {props.availableTags.length > 0 ? (
-          <div className="flex flex-1 items-center gap-2 overflow-x-auto">
+          <div className="flex flex-1 items-center gap-2 pb-2 overflow-x-auto">
             {props.availableTags.map((tag) => (
               <button
                 key={tag.id}
