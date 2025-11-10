@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import { browser } from 'wxt/browser';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
@@ -17,7 +18,7 @@ interface UserInfo {
 }
 
 async function signIn(): Promise<UserInfo> {
-  const redirectURL = chrome.identity.getRedirectURL();
+  const redirectURL = browser.identity.getRedirectURL();
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
@@ -35,7 +36,7 @@ async function signIn(): Promise<UserInfo> {
     throw new Error('No auth URL');
   }
 
-  const responseUrl = await chrome.identity.launchWebAuthFlow({
+  const responseUrl = await browser.identity.launchWebAuthFlow({
     url: data.url,
     interactive: true,
   });
@@ -74,7 +75,7 @@ async function signIn(): Promise<UserInfo> {
     picture: user.user_metadata.avatar_url || user.user_metadata.picture || '',
   };
 
-  await chrome.storage.local.set({
+  await browser.storage.local.set({
     userInfo,
     session: sessionData.session,
   });
@@ -84,11 +85,11 @@ async function signIn(): Promise<UserInfo> {
 
 async function signOut(): Promise<void> {
   await supabase.auth.signOut();
-  await chrome.storage.local.remove(['userInfo', 'session']);
+  await browser.storage.local.remove(['userInfo', 'session']);
 }
 
 async function restoreSession(): Promise<UserInfo | null> {
-  const result = await chrome.storage.local.get(['session', 'userInfo']);
+  const result = await browser.storage.local.get(['session', 'userInfo']);
 
   if (!result.session) {
     return null;
@@ -97,14 +98,14 @@ async function restoreSession(): Promise<UserInfo | null> {
   const { data, error } = await supabase.auth.setSession(result.session);
 
   if (error || !data.session) {
-    await chrome.storage.local.remove(['userInfo', 'session']);
+    await browser.storage.local.remove(['userInfo', 'session']);
     return null;
   }
 
   return result.userInfo || null;
 }
 
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'signIn') {
     signIn()
       .then(sendResponse)

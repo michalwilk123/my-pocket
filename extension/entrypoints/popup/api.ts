@@ -1,5 +1,7 @@
 // API service for backend communication
 
+import { browser } from 'wxt/browser';
+
 interface SaveLinkParams {
   title: string;
   url: string;
@@ -8,7 +10,7 @@ interface SaveLinkParams {
 }
 
 export async function saveLink(params: SaveLinkParams): Promise<void> {
-  const result = await chrome.storage.local.get(['session']);
+  const result = await browser.storage.local.get(['session']);
 
   if (!result.session) {
     throw new Error('Not authenticated');
