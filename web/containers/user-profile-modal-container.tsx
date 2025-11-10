@@ -102,6 +102,7 @@ export function UserProfileModalContainer(
   async function handleLogout() {
     await signOutUser();
     props.onClose();
+    window.location.href = "/";
   }
 
   async function handleDeleteAccount() {
@@ -116,6 +117,7 @@ export function UserProfileModalContainer(
       await deleteUserAccount();
       props.onClose();
       showToast("Account deleted successfully.");
+      window.location.href = "/";
     } catch (error) {
       console.error("Failed to delete account", error);
       showToast("Failed to delete account. Please try again.");

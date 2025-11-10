@@ -11,6 +11,11 @@ export function AuthButton() {
   const signInWithGoogle = useAuthStore((state) => state.signInWithGoogle);
   const signOut = useAuthStore((state) => state.signOut);
 
+  async function handleSignOut() {
+    await signOut();
+    window.location.href = "/";
+  }
+
   return (
     <Loadable
       isLoading={isLoading}
@@ -36,7 +41,7 @@ export function AuthButton() {
             <span className="text-xs text-muted-foreground">{user.email}</span>
           </div>
           <button
-            onClick={signOut}
+            onClick={handleSignOut}
             className="rounded-full border border-border px-4 py-2 text-sm font-medium transition-colors hover:bg-muted"
           >
             Sign Out
