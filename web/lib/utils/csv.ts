@@ -15,7 +15,12 @@ function parseCsvLine(line: string): string[] {
     const char = line[i];
 
     if (char === '"') {
-      inQuotes = !inQuotes;
+      if (inQuotes && i + 1 < line.length && line[i + 1] === '"') {
+        currentField += '"';
+        i++;
+      } else {
+        inQuotes = !inQuotes;
+      }
     } else if (char === "," && !inQuotes) {
       fields.push(currentField);
       currentField = "";
@@ -67,8 +72,9 @@ function parsePocketFormat(lines: string[]): CsvLinkRow[] {
       ? Math.floor(Date.now() / 1000)
       : timeAdded;
 
-    const tags =
-      tagsStr.length > 0 ? tagsStr.split("|").map((t) => t.trim()) : [];
+    const tags = tagsStr.length > 0
+      ? tagsStr.split("|").map((t) => t.trim()).filter((t) => t.length > 0)
+      : [];
 
     rows.push({
       title: title || url,
@@ -109,16 +115,13 @@ function parseInstapaperFormat(lines: string[]): CsvLinkRow[] {
     const tagsStr = fields[5].trim();
     let tags: string[] = [];
 
-    if (tagsStr.length > 0 && tagsStr !== "[]") {
-      try {
-        const parsed = JSON.parse(tagsStr);
-        if (Array.isArray(parsed)) {
-          tags = parsed
-            .map((t) => String(t).trim())
-            .filter((t) => t.length > 0);
-        }
-      } catch {
-        tags = [];
+    if (tagsStr && tagsStr !== "[]") {
+      const content = tagsStr.replace(/^\[|\]$/g, "").trim();
+      if (content) {
+        tags = content
+          .split(",")
+          .map((t) => t.trim().replace(/^["']|["']$/g, ""))
+          .filter((t) => t.length > 0);
       }
     }
 
