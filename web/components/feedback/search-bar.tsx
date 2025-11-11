@@ -33,6 +33,19 @@ export function SearchBar(props: SearchBarProps) {
     return props.selectedTags.includes(tagId);
   }
 
+  function getSortedTags(): Tag[] {
+    return [...props.availableTags].sort((a, b) => {
+      const aSelected = isTagSelected(a.id);
+      const bSelected = isTagSelected(b.id);
+
+      if (aSelected !== bSelected) {
+        return aSelected ? -1 : 1;
+      }
+
+      return a.label.localeCompare(b.label);
+    });
+  }
+
   return (
     <div className="w-full space-y-3">
       <form
@@ -74,7 +87,7 @@ export function SearchBar(props: SearchBarProps) {
       <div className="flex flex-col gap-2.5 rounded-lg border border-base-300/70 bg-base-200/40 p-2.5 shadow-sm sm:flex-row sm:items-center sm:justify-between">
         {props.availableTags.length > 0 ? (
           <div className="flex flex-1 items-center gap-2 pb-2 overflow-x-auto">
-            {props.availableTags.map((tag) => (
+            {getSortedTags().map((tag) => (
               <button
                 key={tag.id}
                 onClick={() => props.onTagToggle(tag.id)}

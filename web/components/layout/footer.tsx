@@ -11,7 +11,17 @@ export function Footer() {
         <span>
           © {new Date().getFullYear()} {t("copyright")}
         </span>
-        <span className="font-medium text-primary/80">{t("tagline")}</span>
+        <span>
+          Made in Poland 🇵🇱 by{" "}
+          <a
+            href="https://micwilk.com/about/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-primary/80 hover:text-primary"
+          >
+            Michał Wilk
+          </a>
+        </span>
       </div>
     </footer>
   );
