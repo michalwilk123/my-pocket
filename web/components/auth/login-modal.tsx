@@ -14,13 +14,10 @@ export function LoginModal() {
   const [error, setError] = useState<string | null>(null);
 
   async function handleGoogleLogin() {
-    console.log("[DEBUG] handleGoogleLogin: Button clicked");
     setIsLoading(true);
     setError(null);
     try {
-      console.log("[DEBUG] handleGoogleLogin: Calling signInWithGoogle");
       await signInWithGoogle();
-      console.log("[DEBUG] handleGoogleLogin: signInWithGoogle completed");
     } catch (err) {
       console.error("[DEBUG] handleGoogleLogin: Error caught", err);
       const errorMessage =

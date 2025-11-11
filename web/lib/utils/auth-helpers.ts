@@ -1,10 +1,7 @@
 import { createClient } from "../supabase/client";
 
 export async function signInWithGoogle() {
-  console.log("[DEBUG] signInWithGoogle: Starting");
   const supabase = createClient();
-  console.log("[DEBUG] signInWithGoogle: Supabase client created", { supabase: !!supabase });
-
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: {
@@ -12,19 +9,10 @@ export async function signInWithGoogle() {
     },
   });
 
-  console.log("[DEBUG] signInWithGoogle: OAuth response", { 
-    hasData: !!data, 
-    hasError: !!error,
-    errorMessage: error?.message,
-    redirectTo: `${window.location.origin}/auth/callback`
-  });
-
   if (error) {
     console.error("[DEBUG] signInWithGoogle: Error occurred", error);
     throw new Error(error.message);
   }
-
-  console.log("[DEBUG] signInWithGoogle: Success, data:", data);
   return data;
 }
 
