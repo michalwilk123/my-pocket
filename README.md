@@ -56,7 +56,7 @@ Should be available i think in:
 
 Go to `Authentication` -> `Sign in / Providers` -> `Auth Providers`
 
-[Screenshot of the google OAuth provider setup](./screenshots/auth-provider.png)
+![Screenshot of the google OAuth provider setup](./screenshots/auth-provider.png)
 
 3) Create the database schema
 
@@ -64,7 +64,7 @@ Go to `Sql Editor`. In the text area, paste the content of `supabase-schema.sql`
 
 4) Setup auth redirects for the web app and extensions (firefox + chrome)
 
-[Screenshot of the auth redirects setup](./screenshots/redirects-urls.png)
+![Screenshot of the auth redirects setup](./screenshots/redirect-urls.png)
 
 to get the link, use:
 
