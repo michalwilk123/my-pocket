@@ -1,5 +1,3 @@
-// API service for backend communication
-
 import { browser } from 'wxt/browser';
 
 interface SaveLinkParams {
@@ -15,21 +13,34 @@ export async function saveLink(params: SaveLinkParams): Promise<void> {
   if (!result.session) {
     throw new Error('Not authenticated');
   }
+  const apiUrl = import.meta.env.VITE_API_URL;
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${result.session.access_token}`,
+  };
+  const body = JSON.stringify(params);
 
-  const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+  try {
+    const response = await fetch(`${apiUrl}/api/links`, {
+      method: 'POST',
+      headers,
+      body,
+    });
 
-  const response = await fetch(`${apiUrl}/api/links`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${result.session.access_token}`,
-    },
-    body: JSON.stringify(params),
-  });
+    if (!response.ok) {
+      const errorText = await response.text();
 
-  if (!response.ok) {
-    const errorData = await response.json().catch(() => ({ error: 'Failed to save link' }));
-    throw new Error(errorData.error || 'Failed to save link');
+      let errorData;
+      try {
+        errorData = JSON.parse(errorText);
+      } catch {
+        errorData = { error: errorText || 'Failed to save link' };
+      }
+
+      throw new Error(errorData.error || 'Failed to save link');
+    }
+  } catch (error) {
+    throw error;
   }
 }
 

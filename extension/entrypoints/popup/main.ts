@@ -5,7 +5,6 @@ import * as api from './api';
 import * as ui from './ui';
 
 const $ = (id: string) => document.getElementById(id);
-const $$ = (selector: string) => document.querySelector(selector);
 
 const handlers = {
   'sign-in-btn': async () => {
@@ -45,7 +44,7 @@ const handlers = {
         tags: stateManager.getTagLabels(),
       });
       ui.setSaveButton('saved');
-      setTimeout(() => window.close(), 1000);
+      setTimeout(() => window.close(), 700);
     } catch (error) {
       console.error('Failed to save link:', error);
       ui.setSaveButton('error');
@@ -58,7 +57,8 @@ function render(): void {
   if (!app) return;
 
   const state = stateManager.getState();
-  app.innerHTML = ui.render(state);
+  app.textContent = '';
+  app.appendChild(ui.render(state));
 
   if (state.user) {
     ui.updateTags(state.tags);
