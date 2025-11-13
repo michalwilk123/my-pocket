@@ -17,7 +17,7 @@
     }
   },
   "linkCard": {
-    "copyUrl": "Copy URL to clipboard",
+    "copyUrl": "URL copied to clipboard",
     "edit": "Edit",
     "delete": "Delete",
     "noTags": "No tags",

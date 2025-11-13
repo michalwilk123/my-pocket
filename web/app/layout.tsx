@@ -164,6 +164,7 @@ export default async function RootLayout({
           </AuthProvider>
         </NextIntlClientProvider>
         <div id="mypocket-modal-root" />
+        <div id="mypocket-toast-root" />
         <Analytics />
       </body>
     </html>

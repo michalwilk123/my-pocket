@@ -37,10 +37,9 @@ CREATE TABLE IF NOT EXISTS mypocket_link_tag (
 );
 
 -- Indexes for performance
-CREATE INDEX IF NOT EXISTS idx_mypocket_tag_user_id ON mypocket_tag(user_id);
-CREATE INDEX IF NOT EXISTS idx_mypocket_tag_label ON mypocket_tag(label);
-CREATE INDEX IF NOT EXISTS idx_mypocket_link_user_id ON mypocket_link(user_id);
-CREATE INDEX IF NOT EXISTS idx_mypocket_link_created_at ON mypocket_link(created_at DESC);
+-- Composite indexes cover single-column queries, so we only need composite ones
+CREATE INDEX IF NOT EXISTS idx_mypocket_link_user_created ON mypocket_link(user_id, created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_mypocket_tag_user_label ON mypocket_tag(user_id, label);
 CREATE INDEX IF NOT EXISTS idx_mypocket_link_tag_link_id ON mypocket_link_tag(link_id);
 CREATE INDEX IF NOT EXISTS idx_mypocket_link_tag_tag_id ON mypocket_link_tag(tag_id);
 
@@ -72,36 +71,36 @@ ALTER TABLE mypocket_link_tag ENABLE ROW LEVEL SECURITY;
 -- Tag policies (user can only see/edit own tags)
 CREATE POLICY "Users can view own tag"
   ON mypocket_tag FOR SELECT
-  USING (auth.uid() = user_id);
+  USING ((select auth.uid()) = user_id);
 
 CREATE POLICY "Users can insert own tag"
   ON mypocket_tag FOR INSERT
-  WITH CHECK (auth.uid() = user_id);
+  WITH CHECK ((select auth.uid()) = user_id);
 
 CREATE POLICY "Users can update own tag"
   ON mypocket_tag FOR UPDATE
-  USING (auth.uid() = user_id);
+  USING ((select auth.uid()) = user_id);
 
 CREATE POLICY "Users can delete own tag"
   ON mypocket_tag FOR DELETE
-  USING (auth.uid() = user_id);
+  USING ((select auth.uid()) = user_id);
 
 -- Link policies (user can only see/edit own links)
 CREATE POLICY "Users can view own link"
   ON mypocket_link FOR SELECT
-  USING (auth.uid() = user_id);
+  USING ((select auth.uid()) = user_id);
 
 CREATE POLICY "Users can insert own link"
   ON mypocket_link FOR INSERT
-  WITH CHECK (auth.uid() = user_id);
+  WITH CHECK ((select auth.uid()) = user_id);
 
 CREATE POLICY "Users can update own link"
   ON mypocket_link FOR UPDATE
-  USING (auth.uid() = user_id);
+  USING ((select auth.uid()) = user_id);
 
 CREATE POLICY "Users can delete own link"
   ON mypocket_link FOR DELETE
-  USING (auth.uid() = user_id);
+  USING ((select auth.uid()) = user_id);
 
 -- Link tag policies (user can manage tags on own links)
 CREATE POLICY "Users can view own link tag"
@@ -110,7 +109,7 @@ CREATE POLICY "Users can view own link tag"
     EXISTS (
       SELECT 1 FROM mypocket_link
       WHERE mypocket_link.id = mypocket_link_tag.link_id
-      AND mypocket_link.user_id = auth.uid()
+      AND mypocket_link.user_id = (select auth.uid())
     )
   );
 
@@ -120,7 +119,7 @@ CREATE POLICY "Users can insert own link tag"
     EXISTS (
       SELECT 1 FROM mypocket_link
       WHERE mypocket_link.id = mypocket_link_tag.link_id
-      AND mypocket_link.user_id = auth.uid()
+      AND mypocket_link.user_id = (select auth.uid())
     )
   );
 
@@ -130,7 +129,7 @@ CREATE POLICY "Users can delete own link tag"
     EXISTS (
       SELECT 1 FROM mypocket_link
       WHERE mypocket_link.id = mypocket_link_tag.link_id
-      AND mypocket_link.user_id = auth.uid()
+      AND mypocket_link.user_id = (select auth.uid())
     )
   );
 
