@@ -9,8 +9,8 @@ If you decide to go delete your account, you can export your bookmarks as a CSV 
 Should be available i think in:
 - https://mypocket.micwilk.com/
 - https://my-pocket-eight.vercel.app/
-- LINK TO FIREFOX EXTENSION
-- LINK TO CHROME EXTENSION
+- https://addons.mozilla.org/en-US/firefox/addon/mypocket
+- https://chromewebstore.google.com/detail/kflelijdooijaedkdcfacheeenkmbagj
 
 
 ## Technologies
