@@ -72,9 +72,9 @@ export function LinkGridContainer({ isInitialLoad }: LinkGridContainerProps) {
     <Loadable
       isLoading={isInitialLoad}
       fallback={
-        <div className="grid gap-5 lg:grid-cols-2 xl:grid-cols-3">
-          {[1, 2, 3, 4, 5, 6].map((i) => (
-            <div key={i} className="skeleton h-80 w-full" />
+        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+            <div key={i} className="skeleton h-56 w-full rounded-box" />
           ))}
         </div>
       }
