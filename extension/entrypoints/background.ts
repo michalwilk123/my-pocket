@@ -4,7 +4,25 @@ import { browser } from 'wxt/browser';
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// Custom storage adapter using browser.storage.local for persistent extension storage
+const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+  auth: {
+    storage: {
+      getItem: async (key) => {
+        const result = await browser.storage.local.get(key);
+        return result[key] ?? null;
+      },
+      setItem: async (key, value) => {
+        await browser.storage.local.set({ [key]: value });
+      },
+      removeItem: async (key) => {
+        await browser.storage.local.remove(key);
+      },
+    },
+    autoRefreshToken: true,
+    persistSession: true,
+  },
+});
 
 export default defineBackground(() => {
   console.log('Background script started');
@@ -100,6 +118,11 @@ async function restoreSession(): Promise<UserInfo | null> {
   if (error || !data.session) {
     await browser.storage.local.remove(['userInfo', 'session']);
     return null;
+  }
+
+  // Persist the potentially refreshed session tokens
+  if (data.session.access_token !== result.session.access_token) {
+    await browser.storage.local.set({ session: data.session });
   }
 
   return result.userInfo || null;
