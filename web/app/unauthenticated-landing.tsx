@@ -71,6 +71,66 @@ export function UnauthenticatedLanding() {
         { id: "tag-12", label: "help" },
       ],
     },
+    {
+      id: "demo-7",
+      title: "Vercel Platform",
+      url: "https://vercel.com",
+      note: "Deploy web projects with the best frontend developer experience.",
+      tags: [
+        { id: "tag-13", label: "hosting" },
+        { id: "tag-14", label: "deployment" },
+      ],
+    },
+    {
+      id: "demo-8",
+      title: "React Documentation",
+      url: "https://react.dev",
+      note: "The library for web and native user interfaces.",
+      tags: [
+        { id: "tag-15", label: "react" },
+        { id: "tag-16", label: "documentation" },
+      ],
+    },
+    {
+      id: "demo-9",
+      title: "Supabase",
+      url: "https://supabase.com",
+      note: "Open source Firebase alternative with Postgres database.",
+      tags: [
+        { id: "tag-17", label: "database" },
+        { id: "tag-18", label: "backend" },
+      ],
+    },
+    {
+      id: "demo-10",
+      title: "Prisma ORM",
+      url: "https://www.prisma.io",
+      note: "Next-generation Node.js and TypeScript ORM for databases.",
+      tags: [
+        { id: "tag-19", label: "database" },
+        { id: "tag-20", label: "typescript" },
+      ],
+    },
+    {
+      id: "demo-11",
+      title: "Figma",
+      url: "https://www.figma.com",
+      note: "Collaborative interface design tool for teams.",
+      tags: [
+        { id: "tag-21", label: "design" },
+        { id: "tag-22", label: "tools" },
+      ],
+    },
+    {
+      id: "demo-12",
+      title: "Linear",
+      url: "https://linear.app",
+      note: "Streamline issues, projects, and product roadmaps.",
+      tags: [
+        { id: "tag-23", label: "productivity" },
+        { id: "tag-24", label: "tools" },
+      ],
+    },
   ];
 
   return (
@@ -83,7 +143,7 @@ export function UnauthenticatedLanding() {
         locale={locale}
       />
       <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-6 px-6 py-6">
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {demoLinks.map((link) => (
             <DemoLinkCard
               key={link.id}

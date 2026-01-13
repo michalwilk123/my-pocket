@@ -80,17 +80,21 @@ export function Pagination(props: PaginationProps) {
 
   return (
     <nav
-      className="flex flex-col items-center gap-2 py-8"
+      className="flex flex-col items-center gap-3 py-6"
       aria-label="Pagination"
     >
-      <div className="flex items-center gap-1 rounded-full border border-base-200/80 bg-base-100/80 px-2 py-2 shadow-sm backdrop-blur">
+      <div className="relative flex items-center gap-1 rounded-full border border-base-300 bg-gradient-to-b from-base-100 to-base-200/50 px-3 py-2 shadow-md">
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 -bottom-px mx-auto h-px w-1/2 bg-gradient-to-r from-transparent via-primary/30 to-transparent"
+        />
         <button
           onClick={() => props.onPageChange(props.currentPage - 1)}
           disabled={props.currentPage === 1}
-          className={`inline-flex h-9 w-9 items-center justify-center rounded-full transition-colors ${
+          className={`inline-flex h-8 w-8 items-center justify-center rounded-full transition-all duration-200 ${
             props.currentPage === 1
-              ? "cursor-not-allowed text-base-content/30"
-              : "text-base-content/70 hover:bg-base-200"
+              ? "cursor-not-allowed text-base-content/25"
+              : "text-base-content/60 hover:bg-primary/10 hover:text-primary"
           }`}
           aria-label="Previous page"
         >
@@ -102,10 +106,10 @@ export function Pagination(props: PaginationProps) {
             return (
               <span
                 key={`ellipsis-${index}`}
-                className="mx-1 h-9 w-9 select-none text-center leading-9 text-base-content/40"
+                className="mx-0.5 h-8 w-8 select-none text-center leading-8 text-base-content/35"
                 aria-hidden="true"
               >
-                ...
+                ···
               </span>
             );
           }
@@ -116,15 +120,21 @@ export function Pagination(props: PaginationProps) {
             <button
               key={pageNum}
               onClick={() => props.onPageChange(pageNum)}
-              className={`inline-flex h-9 min-w-[2.25rem] items-center justify-center rounded-full px-3 text-sm font-semibold transition-all ${
+              className={`relative inline-flex h-8 min-w-[2rem] items-center justify-center rounded-full px-2.5 text-sm font-semibold transition-all duration-200 ${
                 isActive
-                  ? "bg-primary text-primary-content shadow"
-                  : "text-base-content/70 hover:bg-base-200"
+                  ? "bg-primary text-primary-content shadow-lg shadow-primary/25 scale-105"
+                  : "text-base-content/60 hover:bg-primary/10 hover:text-primary hover:scale-105"
               }`}
               aria-label={`Page ${pageNum}`}
               aria-current={isActive ? "page" : undefined}
             >
               {pageNum}
+              {isActive && (
+                <span
+                  aria-hidden="true"
+                  className="absolute -bottom-1 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-primary"
+                />
+              )}
             </button>
           );
         })}
@@ -132,23 +142,23 @@ export function Pagination(props: PaginationProps) {
         <button
           onClick={() => props.onPageChange(props.currentPage + 1)}
           disabled={props.currentPage === props.totalPages}
-          className={`inline-flex h-9 w-9 items-center justify-center rounded-full transition-colors ${
+          className={`inline-flex h-8 w-8 items-center justify-center rounded-full transition-all duration-200 ${
             props.currentPage === props.totalPages
-              ? "cursor-not-allowed text-base-content/30"
-              : "text-base-content/70 hover:bg-base-200"
+              ? "cursor-not-allowed text-base-content/25"
+              : "text-base-content/60 hover:bg-primary/10 hover:text-primary"
           }`}
           aria-label="Next page"
         >
           <ChevronRight className="h-4 w-4" />
         </button>
       </div>
-      <p className="text-xs text-base-content/50">
+      <p className="text-xs text-base-content/45">
         {t("showing")}{" "}
-        <span className="font-medium text-base-content/70">
+        <span className="font-semibold text-base-content/65">
           {startItem}-{endItem}
         </span>{" "}
         {t("of")}{" "}
-        <span className="font-medium text-base-content/70">
+        <span className="font-semibold text-base-content/65">
           {props.totalResults}
         </span>{" "}
         {t("results")}

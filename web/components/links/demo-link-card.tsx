@@ -54,30 +54,30 @@ export function DemoLinkCard(props: DemoLinkCardProps) {
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-primary/60 transition-all group-hover:bg-primary/80"
       />
-      <figure className="relative flex h-40 items-center justify-center overflow-hidden bg-gradient-to-br from-base-200 to-base-300">
-        <div className="flex flex-col items-center gap-3">
-          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-md">
+      <figure className="relative flex h-28 items-center justify-center overflow-hidden bg-gradient-to-br from-base-200 to-base-300">
+        <div className="flex flex-col items-center gap-2">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-md">
             {!faviconFailed && faviconUrl ? (
               <Image
                 src={faviconUrl}
                 alt={`${domain} favicon`}
-                width={40}
-                height={40}
-                className="h-10 w-10"
+                width={28}
+                height={28}
+                className="h-7 w-7"
                 onError={() => setFailedFaviconUrl(faviconUrl)}
                 unoptimized
               />
             ) : (
-              <Globe className="h-10 w-10 text-primary" aria-hidden="true" />
+              <Globe className="h-7 w-7 text-primary" aria-hidden="true" />
             )}
           </div>
-          <span className="text-sm font-medium text-base-content/60">
+          <span className="text-xs font-medium text-base-content/60">
             {domain}
           </span>
         </div>
       </figure>
-      <div className="card-body gap-2.5">
-        <h2 className="card-title text-base break-all">{props.title}</h2>
+      <div className="card-body gap-2 p-3">
+        <h2 className="card-title text-sm leading-tight break-all">{props.title}</h2>
         <div className="flex items-center gap-2 text-xs text-primary/70">
           <ExternalLink className="h-3 w-3" />
           <span className="truncate">{props.url}</span>

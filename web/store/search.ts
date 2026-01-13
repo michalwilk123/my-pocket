@@ -2,7 +2,7 @@ import { createWithEqualityFn } from "zustand/traditional";
 
 import { Link } from "@/lib/models";
 
-const DEFAULT_LINKS_PER_PAGE = 12;
+const DEFAULT_LINKS_PER_PAGE = 24;
 
 export const SORT_OPTIONS = [
   "newest",
